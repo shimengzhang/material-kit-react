@@ -38,7 +38,10 @@ const Login = () => {
               password: 'Password123'
             }}
             validationSchema={Yup.object().shape({
-              email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
+              email: Yup.string()
+                .email('Must be a valid email')
+                .max(255)
+                .required('Email is required'),
               password: Yup.string().max(255).required('Password is required')
             })}
             onSubmit={() => {
@@ -56,10 +59,7 @@ const Login = () => {
             }) => (
               <form onSubmit={handleSubmit}>
                 <Box sx={{ mb: 3 }}>
-                  <Typography
-                    color="textPrimary"
-                    variant="h2"
-                  >
+                  <Typography color="textPrimary" variant="h2">
                     Sign in
                   </Typography>
                   <Typography
@@ -70,15 +70,8 @@ const Login = () => {
                     Sign in on the internal platform
                   </Typography>
                 </Box>
-                <Grid
-                  container
-                  spacing={3}
-                >
-                  <Grid
-                    item
-                    xs={12}
-                    md={6}
-                  >
+                <Grid container spacing={3}>
+                  <Grid item xs={12} md={6}>
                     <Button
                       color="primary"
                       fullWidth
@@ -90,11 +83,7 @@ const Login = () => {
                       Login with Facebook
                     </Button>
                   </Grid>
-                  <Grid
-                    item
-                    xs={12}
-                    md={6}
-                  >
+                  <Grid item xs={12} md={6}>
                     <Button
                       fullWidth
                       startIcon={<GoogleIcon />}
@@ -158,17 +147,9 @@ const Login = () => {
                     Sign in now
                   </Button>
                 </Box>
-                <Typography
-                  color="textSecondary"
-                  variant="body1"
-                >
-                  Don&apos;t have an account?
-                  {' '}
-                  <Link
-                    component={RouterLink}
-                    to="/register"
-                    variant="h6"
-                  >
+                <Typography color="textSecondary" variant="body1">
+                  Don&apos;t have an account?&nbsp;&nbsp;
+                  <Link component={RouterLink} to="/register" variant="h6">
                     Sign up
                   </Link>
                 </Typography>

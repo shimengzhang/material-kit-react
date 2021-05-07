@@ -1,21 +1,21 @@
+/* eslint-disable */
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { experimentalStyled } from '@material-ui/core';
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
 
-const DashboardLayoutRoot = experimentalStyled('div')(
-  ({ theme }) => ({
-    backgroundColor: theme.palette.background.default,
-    display: 'flex',
-    height: '100%',
-    overflow: 'hidden',
-    width: '100%'
-  })
-);
+const DashboardLayoutRoot = experimentalStyled('div')(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
+  display: 'flex',
+  height: '100%',
+  overflow: 'hidden',
+  width: '100%'
+}));
 
-const DashboardLayoutWrapper = experimentalStyled('div')(
-  ({ theme }) => ({
+const DashboardLayoutWrapper = experimentalStyled('div')(({ theme }) => {
+  console.log('DashboardLayoutWrapper', theme);
+  return {
     display: 'flex',
     flex: '1 1 auto',
     overflow: 'hidden',
@@ -23,8 +23,8 @@ const DashboardLayoutWrapper = experimentalStyled('div')(
     [theme.breakpoints.up('lg')]: {
       paddingLeft: 256
     }
-  })
-);
+  };
+});
 
 const DashboardLayoutContainer = experimentalStyled('div')({
   display: 'flex',
@@ -38,9 +38,9 @@ const DashboardLayoutContent = experimentalStyled('div')({
   overflow: 'auto'
 });
 
-const DashboardLayout = () => {
+const DashboardLayout = (props) => {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
-
+  console.log('dash layout', props.theme);
   return (
     <DashboardLayoutRoot>
       <DashboardNavbar onMobileNavOpen={() => setMobileNavOpen(true)} />

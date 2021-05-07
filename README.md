@@ -10,15 +10,14 @@
 
 We also have a pro version of this product which bundles even more pages and components if you want to save more time and design efforts :)
 
-
-| Free Version (this one)              | [Material Kit Pro - React](https://material-ui.com/store/items/devias-kit-pro/) |
-| ------------------------ | :----------------------------------------------------------- |
-| **7** Demo Pages         | **32** demo pages
-| -                        | ✔ Dark & light mode
-| -                        | ✔ Authentication with *Amplify**, **Auth0** and **Firebase**  
-| -                        | ✔ TypeScript version                                                                                   
-| -                        | ✔ Design files (sketch & figma) - for extended license       
-| -                        | ✔ Complete users flows                                       
+| Free Version (this one) | [Material Kit Pro - React](https://material-ui.com/store/items/devias-kit-pro/) |
+| ----------------------- | :------------------------------------------------------------------------------ |
+| **7** Demo Pages        | **32** demo pages                                                               |
+| -                       | ✔ Dark & light mode                                                             |
+| -                       | ✔ Authentication with \*Amplify**, **Auth0** and **Firebase\*\*                 |
+| -                       | ✔ TypeScript version                                                            |
+| -                       | ✔ Design files (sketch & figma) - for extended license                          |
+| -                       | ✔ Complete users flows                                                          |
 
 ## Demo
 
@@ -29,7 +28,6 @@ We also have a pro version of this product which bundles even more pages and com
 - [Login Page](https://material-kit-react.devias.io/login)
 - [Account Page](https://material-kit-react.devias.io/app/account)
 - [Settings Page](https://material-kit-react.devias.io/app/settings)
-
 
 ## Quick start
 

@@ -19,7 +19,8 @@ import {
   ShoppingBag as ShoppingBagIcon,
   User as UserIcon,
   UserPlus as UserPlusIcon,
-  Users as UsersIcon
+  Users as UsersIcon,
+  Triangle as TriangleIcon
 } from 'react-feather';
 import NavItem from './NavItem';
 
@@ -54,6 +55,11 @@ const items = [
     href: '/app/settings',
     icon: SettingsIcon,
     title: 'Settings'
+  },
+  {
+    href: '/app/ttt',
+    icon: TriangleIcon,
+    title: 'Mytest'
   },
   {
     href: '/login',
@@ -107,16 +113,10 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
           }}
           to="/app/account"
         />
-        <Typography
-          color="textPrimary"
-          variant="h5"
-        >
+        <Typography color="textPrimary" variant="h5">
           {user.name}
         </Typography>
-        <Typography
-          color="textSecondary"
-          variant="body2"
-        >
+        <Typography color="textSecondary" variant="body2">
           {user.jobTitle}
         </Typography>
       </Box>
@@ -179,7 +179,7 @@ DashboardSidebar.propTypes = {
 };
 
 DashboardSidebar.defaultProps = {
-  onMobileClose: () => { },
+  onMobileClose: () => {},
   openMobile: false
 };
 

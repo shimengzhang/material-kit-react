@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://x.autoimg.cn/bi/mda/ahas_head.min.js?v=20170612"></script>
+
+  <style>
+    .parent {
+      margin: 100px auto;
+      padding: 50px 50px;
+      width: 100px;
+      height: 100px;
+      background-color: gray;
+    }
+
+    .son {
+      width: 100px;
+      height: 100px;
+      background-color: yellow;
+    }
+
+    .bp-circled-style {
+      outline: 1px solid red !important;
+      outline-offset: -1px !important;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="parent">
+    <div class="son">
+      <div>hello</div>
+    </div>
+    <div class="son">
+      <div>hello1</div>
+    </div>
+  </div>
+  <script>
+    document.domain = "autohome.com.cn";
+    document.addEventListener('mouseover', (e) => {
+      console.log('mouseover', e.target);
+      e.target.classList.add('bp-circled-style');
+    });
+    document.addEventListener('mouseout', (e) => {
+      console.log('mouseout', e.target);
+      e.target.classList.remove('bp-circled-style');
+    });
+    document.addEventListener('click', (e) => {
+      console.log('click', e.target)
+    })
+    document.oncontextmenu = (e) => {
+      console.log('right', e.target)
+      e.preventDefault()
+    }
+  </script>
+  <!-- <script src="bp-sdk.js"></script> -->
+</body>
+
+</html>

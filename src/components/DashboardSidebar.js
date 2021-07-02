@@ -25,12 +25,18 @@ import {
 import NavItem from './NavItem';
 
 const user = {
-  avatar: '/static/images/avatars/avatar_6.png',
-  jobTitle: 'Senior Developer',
-  name: 'Katarina Smith'
+  // avatar: '/static/images/avatars/avatar_6.png',
+  avatar: '',
+  jobTitle: 'Developer',
+  name: 'Zhang Shi Meng'
 };
 
 const items = [
+  {
+    href: '/app/main',
+    icon: TriangleIcon,
+    title: '添加埋点'
+  },
   {
     href: '/app/dashboard',
     icon: BarChartIcon,
@@ -55,11 +61,6 @@ const items = [
     href: '/app/settings',
     icon: SettingsIcon,
     title: 'Settings'
-  },
-  {
-    href: '/app/ttt',
-    icon: TriangleIcon,
-    title: 'Mytest'
   },
   {
     href: '/login',
@@ -112,7 +113,9 @@ const DashboardSidebar = ({ onMobileClose, openMobile }) => {
             height: 64
           }}
           to="/app/account"
-        />
+        >
+          ZSM
+        </Avatar>
         <Typography color="textPrimary" variant="h5">
           {user.name}
         </Typography>

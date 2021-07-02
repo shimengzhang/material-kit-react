@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .wrapper {
+      padding: 100px;
+      background-color: khaki;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <iframe id="myiframe" onload="" src="//dev.autohome.com.cn:3000/index" width="375" height="667"
+      frameborder="0"></iframe>
+  </div>
+  <script>
+    document.domain = 'autohome.com.cn'
+    var iframe = document.getElementById("myiframe")
+
+    // 给 iframe 插入  script 标签
+    function insertScript() {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src = "circle.js";
+      iframe.contentWindow.document.body.appendChild(script);
+    }
+
+    iframe.onload = () => {
+      insertScript()
+    }
+
+    // 接收来自 iframe 点选事件发送的 message
+    window.addEventListener('message', ({
+      data
+    }) => {
+      console.log('receive', data)
+    })
+
+  </script>
+</body>
+
+</html>

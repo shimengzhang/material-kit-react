@@ -1,0 +1,8 @@
+.tpm-circled-style {
+  outline: 1px solid red !important;
+  outline-offset: -1px !important;
+}
+.tpm-circled-style-dashed {
+  outline: 1px dashed red !important;
+  outline-offset: -1px !important;
+}

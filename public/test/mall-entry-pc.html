@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://x.autoimg.cn/bi/mda/ahas_head.min.js?v=20170612"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    html {
+      background-color: #FFFFFF;
+      font: 16px/1 -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial,
+        "PingFang SC", "Hiragino Sans GB", "Heiti SC", STHeiTi, "Microsoft YaHei",
+        sans-serif;
+      color: #111E36;
+    }
+
+    .wrap {
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 192px;
+    }
+
+    .slide,
+    .slide__inner {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide__inner {
+      width: 200px;
+      height: 173px;
+    }
+
+    .slide__track {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .slide__item {
+      position: relative;
+      float: left;
+      width: 200px;
+      height: 173px;
+      padding-top: 5px;
+      color: #fff;
+      letter-spacing: 0;
+      text-align: center;
+      border: 2px solid #FF6600;
+      box-sizing: border-box;
+    }
+
+    .slide__item .car-img {
+      width: 172px;
+      height: 128px;
+      margin: 0 auto;
+    }
+
+    .slide__item .car-img img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .slide__item .tag {
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      width: 64px;
+      height: 23px;
+      background: url(//s.autoimg.cn/topic/mall-entry/tag-bg.png) left top no-repeat;
+      background-size: 100%;
+      font-family: MicrosoftYaHei;
+      font-size: 12px;
+      line-height: 22px;
+    }
+
+    .content-text {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 196px;
+      padding-top: 4px;
+      padding-bottom: 7px;
+      box-sizing: border-box;
+      line-height: 1;
+      background: url(//s.autoimg.cn/topic/mall-entry/title-bg.png) left top no-repeat;
+      background-size: 100%;
+    }
+
+    .price {
+      width: 65px;
+      line-height: 19px;
+      font-family: MicrosoftYaHei-Bold;
+      font-size: 18px;
+      margin-bottom: 3px;
+    }
+
+    .car-name {
+      display: inline-block;
+      width: 84px;
+      height: 16px;
+      line-height: 16px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: MicrosoftYaHei-Bold;
+      font-size: 12px;
+    }
+
+    .worth {
+      display: inline-block;
+      width: 99px;
+      height: 16px;
+      line-height: 16px;
+      overflow: hidden;
+      ;
+      font-family: MicrosoftYaHei;
+      font-size: 12px;
+    }
+
+    .items {
+      display: flex;
+      align-items: flex-end;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+      cursor: pointer;
+    }
+
+    .items .item {
+      width: 6px;
+      height: 6px;
+      margin-right: 7px;
+      background: #989CAB;
+      opacity: 0.2;
+      border-radius: 3px;
+    }
+
+    .items .item:first-of-type {
+      background: #0055FF;
+      opacity: 1;
+      height: 10px;
+    }
+
+    .items .item:last-of-type {
+      margin-right: 0;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="slide">
+      <div class="slide__inner">
+        <div class="slide__track" style="width: 1000px;"></div>
+      </div>
+    </div>
+    <ul class="items" style="z-index:99"></ul>
+    <!-- <div class="button">
+      <div class="btn fl" id="left">&lt;</div>
+      <div class="btn fr" id="right">&gt;</div>
+    </div> -->
+  </div>
+
+  <script type="text/javascript">
+    function getCookie(name, defval) {
+      var nameEq = `${name}=`;
+      var ca = document.cookie.split(';');
+      for (var i = 0; i < ca.length; i += 1) {
+        var c = ca[i];
+        while (c.charAt(0) === ' ') {
+          c = c.substring(1, c.length);
+        }
+        if (c.indexOf(nameEq) === 0) {
+          return decodeURIComponent(c.substring(nameEq.length, c.length));
+        }
+      }
+      return typeof defval === 'undefined' ? '' : defval;
+    }
+
+    var num = 0; // 获取当前图片的下标；
+    var wrap = document.getElementsByClassName('wrap')[0];
+    var mouse = document.getElementsByClassName("slide")[0]; // 获取放图片的整个盒子；
+    var track = document.getElementsByClassName("slide__track")[0];
+    // 自动轮播
+    function ImgAuto(adress) {
+      var li = document.getElementsByClassName("item"); // 获取li数组元素；
+      var slideLen = li.length;
+      if (slideLen === 0) return;
+      for (var i = 0; i < slideLen; i++) {
+        li[i].style.height = "6px";
+        li[i].style.background = "#989CAB";
+        li[i].style.opacity = 0.2;
+      };
+      li[num].style.height = "10px";
+      li[num].style.background = "#0055FF";
+      li[num].style.opacity = 1;
+      if (adress == "right") {
+        track.style.left = -200 * num + 'px';
+        num++;
+        if (num >= slideLen) {
+          num = 0; // 当num大于等于图片数组长度时，归零；
+        };
+      } else if (adress == "left") {
+        track.style.left = -200 * num + 'px';
+        num--;
+        if (num < 0) {
+          num = slideLen - 1;
+        }
+      }
+    }
+
+    // left.onclick = function(){ //左边按钮事件；
+    //   ImgAuto("left");
+    // }
+    // right.onclick = function(){ //右边按钮事件；
+    //   ImgAuto("right");
+    // }
+
+    // ajax 请求
+    function ajax(options) {
+      if (options.url) {
+        var xhr = XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHTTP")
+        var url = options.url,
+          type = options.type.toUpperCase(),
+          data = options.data,
+          dataArr = [];
+        for (let key in data) {
+          let value = key + '=' + data[key]
+          dataArr.push(value)
+        }
+        if (type === "GET") {
+          url = url + "?" + dataArr.join('&')
+          xhr.open(type, url, true)
+          xhr.send()
+        }
+        if (type === "POST") {
+          xhr.open(type, url, true)
+          xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+          xhr.send(dataArr.join('&'))
+        }
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4) {
+            if (xhr.status == 200 || xhr.status == 304) {
+              options.success(xhr.responseText)
+            } else {
+              options.error(xhr.responseText)
+            }
+          }
+        }
+      }
+    }
+
+    // http://wiki.corpautohome.com/pages/viewpage.action?pageId=137537659
+    // 测试：  http://buynewcar-api.yz.test.autohome.com.cn/search/getMallCouponsRecommendForPC
+    // 线上： https://buynewcar.api.autohome.com.cn/search/getMallCouponsRecommendForPC?cityid=110100
+    ajax({
+      url: 'https://buynewcar.api.autohome.com.cn/search/getMallCouponsRecommendForPC',
+      type: 'get',
+      data: {
+        cityid: getCookie('cookieCityId') || getCookie('area') || 110100,
+        origin: location.origin,
+      },
+      success: function (res) {
+        var result = JSON.parse(res);
+        if (result.returncode === 0) {
+          var html = '';
+          var str = '';
+          var len = result.result.length;
+          if (len > 5) {
+            len = 5;
+          }
+          for (var i = 0; i < len; i++) {
+            var tagName = '新车特卖';
+            if (i % 2) {
+              tagName = '限时抢购';
+            }
+            html += '<a href="' + result.result[i].pcJumpUrl + '" class="slide__item" target="open">' +
+              '<p class="tag">' + tagName + '</p>' +
+              '<p class="car-img"><img src="' + result.result[i].mainpic + '" /></p>' +
+              '<div class="content-text">' +
+              '<p class="price">¥' + result.result[i].price + '</p>' +
+              '<p>' +
+              '<span class="car-name">' + result.result[i].title + '</span>' +
+              '<span class="worth">' + result.result[i].priceDesc + '</span>' +
+              '</p>' +
+              '</div>' +
+              '</a>';
+
+            str += '<li class="item"></li>';
+          }
+          document.getElementsByClassName('slide__track')[0].style.width = len * 200 + 'px';
+          document.getElementsByClassName('slide__track')[0].innerHTML = html;
+          document.getElementsByClassName('items')[0].innerHTML = str;
+
+          clearInterval(move);
+          // 自动轮播
+          var move = setInterval(function () {
+            ImgAuto("right");
+          }, 2000);
+
+          // 手动轮播
+          var li = document.getElementsByClassName("item"); // 获取li数组元素；
+          var slideLen = li.length;
+          for (var i = 0; i < slideLen; i++) {
+            li[i].index = i;
+            li[i].onclick = function () {
+              for (var j = 0; j < slideLen; j++) {
+                li[j].style.height = "6px";
+                li[j].style.background = "#989CAB";
+                li[j].style.opacity = 0.2;
+              };
+              this.style.height = "10px";
+              this.style.background = "#0055FF";
+              this.style.opacity = 1;
+              num = this.index;
+              track.style.left = -200 * num + 'px';
+            }
+          };
+
+          wrap.onmouseover = function () { // 鼠标移上去的事件（停止自动轮播）
+            clearInterval(move);
+          }
+          wrap.onmouseout = function () { // 鼠标移开事件（恢复自动轮播）
+            move = setInterval(function () {
+              ImgAuto("right")
+            }, 2000);
+          }
+        }
+      },
+      error: function (error) {
+        console.log(error);
+      }
+    });
+
+  </script>
+
+  <script>
+    // 40% 的统计
+    // 点击统计
+    document.getElementsByClassName('wrap')[0].onclick = function () {
+      tongjiExtends({
+        action: 'app_trade_tj_kp_click',
+        enid: 6842494,
+        sourceid: 6842494,
+        cityid: getCookie('cookieCityId') || getCookie('area'),
+        userid: getCookie('autouserid'),
+      });
+    };
+    // 曝光统计
+    tongjiExtends({
+      action: 'app_trade_tj_kp_show',
+      type: 'show',
+      enid: 6842494,
+      sourceid: 6842494,
+      cityid: getCookie('cookieCityId') || getCookie('area'),
+      userid: getCookie('autouserid'),
+    });
+
+    function tongjiExtends(obj) {
+      if (!trackCustomEvent) {
+        return;
+      }
+      trackCustomEvent(
+        'auto_common_event', {
+          biz: 'auto',
+          type: obj.type || 'click',
+          action: obj.action,
+          ctime: new Date().getTime(),
+          area: obj.area || 'bottom',
+          element: 'details',
+          pmark: '0',
+        }, {
+          enid: obj.enid,
+          sourceid: obj.sourceid,
+          cityid: obj.cityid || 110100,
+          userid: obj.userid || 0,
+        }
+      );
+    }
+
+  </script>
+  <script>
+    var pvTrack = {};
+    pvTrack.site = 1211139; //一级频道
+    pvTrack.category = 1633; //二级频道
+    pvTrack.subcategory = 20192; //三级频道
+    pvTrack.object = 0;
+    pvTrack.type = 0;
+    pvTrack.typeid = 0;
+    pvTrack.series = 0;
+    pvTrack.spec = 0;
+    pvTrack.level = 0;
+    pvTrack.dealer = 0;
+    pvTrack.pageVars = {
+      enid: 6842494,
+      sourceid: 6842494
+    };
+    if (Math.random() < 0.6) {
+      (function (doc) {
+        var _as = doc.createElement('script');
+        _as.type = 'text/javascript';
+        _as.async = true;
+        _as.src =
+          'https://x.autoimg.cn/bi/mda/ahas_body.min.js?d=' +
+          new Date().toLocaleDateString().replace(/\//g, '');
+        var s = doc.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(_as, s);
+      })(document);
+    }
+
+  </script>
+</body>
+
+</html>

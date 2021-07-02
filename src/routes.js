@@ -10,6 +10,7 @@ import ProductList from 'src/pages/ProductList';
 import Register from 'src/pages/Register';
 import Settings from 'src/pages/Settings';
 import Mytest from 'src/pages/Mytest';
+import Draw from 'src/pages/Draw';
 
 const routes = [
   {
@@ -21,7 +22,8 @@ const routes = [
       { path: 'dashboard', element: <Dashboard /> },
       { path: 'products', element: <ProductList /> },
       { path: 'settings', element: <Settings /> },
-      { path: 'ttt', element: <Mytest /> },
+      { path: 'main', element: <Mytest /> },
+      { path: 'draw', element: <Draw /> },
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },

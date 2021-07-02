@@ -2,8 +2,8 @@ import { Helmet } from 'react-helmet';
 import {
   Box,
   Container,
-  Grid,
-  Pagination
+  Grid
+  // Pagination
 } from '@material-ui/core';
 import ProductListToolbar from 'src/components/product/ProductListToolbar';
 import ProductCard from 'src/components/product//ProductCard';
@@ -24,24 +24,15 @@ const ProductList = () => (
       <Container maxWidth={false}>
         <ProductListToolbar />
         <Box sx={{ pt: 3 }}>
-          <Grid
-            container
-            spacing={3}
-          >
+          <Grid container spacing={3}>
             {products.map((product) => (
-              <Grid
-                item
-                key={product.id}
-                lg={4}
-                md={6}
-                xs={12}
-              >
+              <Grid item key={product.id} lg={4} md={6} xs={12}>
                 <ProductCard product={product} />
               </Grid>
             ))}
           </Grid>
         </Box>
-        <Box
+        {/* <Box
           sx={{
             display: 'flex',
             justifyContent: 'center',
@@ -53,7 +44,7 @@ const ProductList = () => (
             count={3}
             size="small"
           />
-        </Box>
+        </Box> */}
       </Container>
     </Box>
   </>

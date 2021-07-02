@@ -10,11 +10,12 @@ import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
+import styled from 'styled-components';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
-    marginTop: '20px !important',
-    minWidth: '120px !important'
+    marginTop: '20px',
+    minWidth: '120px'
   }
 }));
 
